@@ -1,12 +1,13 @@
 import React from 'react'
 import Hero from './components/Hero';
 import { heroapi, popularsales, toprateslaes, highlight, sneaker, story, footerAPI } from './data/data';
-import { Footer, Sales, FlexContent, Stories, NavBar } from './components';
+import { Footer, Sales, FlexContent, Stories, NavBar, Cart } from './components';
 
 const App = () => {
   return (
     <>
       <NavBar />
+      <Cart/>
       <main className='gap-16 relative flex flex-col'>
         <Hero heroapi={heroapi} />
         <Sales endpoint={popularsales} ifExists />
