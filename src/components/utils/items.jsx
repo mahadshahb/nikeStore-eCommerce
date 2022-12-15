@@ -1,9 +1,16 @@
 import { StarIcon, ShoppingBagIcon } from '@heroicons/react/24/solid';
-import React from 'react'
+import React from 'react';
+import { useDispatch } from 'react-redux';
+import { setAddItemsCart } from '../../app/CartSlice';
 
 const Items = ({
   id, color, ifExists, shadow, title, text, img, btn, rating, price
 }) => {
+  const dispatch = useDispatch();
+  const AddToCart = () => {
+    const item = { id, title, text, img, color, shadow, price };
+    dispatch(setAddItemsCart(item));
+  }
   return (
     <>
       <div className={`relative bg-gradient-to-b ${color} ${shadow} grid 
@@ -27,7 +34,7 @@ const Items = ({
           <div className='flex items-center gap-3'>
             <button className='icon-style text-slate-900 bg-white blur-effect-theme button-theme
             p-0.5 shadow shadow-sky-200
-            ' type='button'>
+            ' type='button' onClick={() => AddToCart()}>
               <ShoppingBagIcon />
             </button>
             <button className='bg-white-90 blur-effect-theme button-theme
