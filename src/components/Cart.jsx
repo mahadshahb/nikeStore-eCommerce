@@ -3,7 +3,7 @@ import CartCount from './cart/CartCount';
 import CartEmpty from './cart/CartEmpty';
 import CartItems from './cart/CartItems';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCartState, selectItemsCart, setCloseCart } from '../app/CartSlice';
+import { selectCartState, selectItemsCart, setClearCartItems, setCloseCart } from '../app/CartSlice';
 
 const Cart = () => {
   const dispatch = useDispatch();
@@ -14,14 +14,17 @@ const Cart = () => {
       cartState: false
     }));
   }
+  const onClearCartItems = () => {
+    dispatch(setClearCartItems());
+  }
   return (
     <div className={`fixed top-0 left-0 right-0 bottom-0 w-full h-screen blur-effect-theme 
     opacity-100 z-[250] ${ifcartState ? 'opacity-100 visible translate-x-0' :
         'opacity-0 invisible translate-x-8'}`}>
       <div className={`blur-effect-theme h-screen max-w-xl w-full absolute right-0`}>
-        <CartCount onCartToggle={onCartToggle} />
+        <CartCount onCartToggle={onCartToggle}  onClearCartItems={onClearCartItems}/>
         {
-          cartItems?.length === 0 ? <CartEmpty /> : <div>
+          cartItems?.length === 0 ? <CartEmpty onCartToggle={onCartToggle}/> : <div>
             <div className='flex items-start justify-start flex-col gap-y-7 lg:gap-y-5 py-3 overflow-y-scroll scroll-smooth h-[81vh] scroll-hidden'>
               {
                 cartItems?.map((item, i) => {

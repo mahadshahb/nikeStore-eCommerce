@@ -11,6 +11,11 @@ const Items = ({
     const item = { id, title, text, img, color, shadow, price };
     dispatch(setAddItemsCart(item));
   }
+  const onCartToggle = () => {
+    dispatch(setOpenCart({
+      cartState: true
+    }))
+  }
   return (
     <>
       <div className={`relative bg-gradient-to-b ${color} ${shadow} grid 
@@ -37,7 +42,7 @@ const Items = ({
             ' type='button' onClick={() => AddToCart()}>
               <ShoppingBagIcon />
             </button>
-            <button className='bg-white-90 blur-effect-theme button-theme
+            <button onClick={() => { AddToCart(); onCartToggle() }} className='bg-white-90 blur-effect-theme button-theme
             px-2 py-1 shadow shadow-sky-200 bg-white text-sm text-black' type='button'>{btn}</button>
           </div>
 
